@@ -16,7 +16,14 @@ struct OrderCardView: View {
             HStack {
                 Text("Order ID : \(order.orderId)")
                 Spacer()
-                Text(order.orderStatus.rawValue.capitalized)
+                Text(getOrderStatusText(order.orderStatus))
+                    .font(.caption)
+                    .fontWeight(.semibold)
+                    .padding(.horizontal, 12)
+                    .padding(.vertical, 6)
+                    .background(orderStatusColor(order.orderStatus))
+                    .foregroundColor(orderStatusTextColor(order.orderStatus))
+                    .clipShape(Capsule())
             }
             .font(.caption)
             .foregroundColor(.gray)
@@ -49,32 +56,31 @@ struct OrderCardView: View {
             HStack {
                 if order.orderStatus == .paid {
                     Button {
-                        
+                        // Action for "Cetak Struk"
                     } label: {
                         Text("Cetak Struk")
-                        fontWeight(.semibold)
+                            .fontWeight(.semibold)
                             .frame(maxWidth: .infinity)
-                            .padding(8)
+                            .padding(10)
                             .background(Color.blue)
                             .foregroundColor(.white)
                             .cornerRadius(8)
                     }
-                    
                 }
                 
                 Button {
-                    
+                    // Action for "Lihat Detail"
                 } label: {
                     Text("Lihat Detail")
+                        .fontWeight(.semibold)
+                        .frame(maxWidth: .infinity)
+                        .padding(10)
+                        .foregroundColor(Color.blue)
                 }
-                .fontWeight(.semibold)
-                .frame(maxWidth: order.orderStatus != .paid ? .infinity : nil)
-                .padding(8)
                 .overlay(
                     RoundedRectangle(cornerRadius: 8)
                         .stroke(Color.blue, lineWidth: 2)
                 )
-                .foregroundColor(Color.blue)
             }
             .padding(.vertical, 8)
         }

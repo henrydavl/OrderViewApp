@@ -44,7 +44,11 @@ struct ContentView: View {
             
             List(dummyOrder, id: \.id) { order in
                 OrderCardView(order: order)
+                    .frame(maxWidth: .infinity)
+                    .listRowInsets(EdgeInsets())
+                    .padding(8)
             }
+            .padding(.vertical, 8)
             .listStyle(.plain)
         }
         .padding()
